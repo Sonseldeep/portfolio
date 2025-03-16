@@ -165,6 +165,7 @@ export default function Hero() {
                   src="/sandeep_merge.png"
                   alt="Sandeep Shrestha"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
