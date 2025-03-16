@@ -59,7 +59,7 @@ export default function Projects() {
     {
       title: "Movie App",
       description:
-        "A full functional react movie web application, implemented concept of Hooks, Redux, integreating the API from movie database",
+        " Working on a full functional react movie web application, implemented concept of Hooks, Redux, integreating the API from movie database",
       image: "/movie_app.png",
       tags: [
         "JavaScript",
