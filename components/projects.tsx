@@ -126,6 +126,7 @@ export default function Projects() {
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className={`object-cover transition-transform duration-700 ${
                     hoveredProject === index ? "scale-110" : "scale-100"
                   }`}

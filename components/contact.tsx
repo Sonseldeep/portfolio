@@ -91,12 +91,6 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    emailjs.sendForm(
-      "service_iifv99x",
-      "template_vt2djk8",
-      e.target,
-      "N5AIfOUdwmyhnppRJ"
-    );
 
     if (!validateForm()) {
       toast({
@@ -110,6 +104,9 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
+      if (!formRef.current) {
+        throw new Error("Form reference is null");
+      }
       const result = await emailjs.sendForm(
         "service_iifv99x",
         "template_vt2djk8",

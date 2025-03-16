@@ -102,7 +102,7 @@ export default function Hero() {
                 size="lg"
                 className="rounded-full"
               >
-                <a href="/resume.pdf" download>
+                <a href="/Profile.pdf" download>
                   <Download className="mr-2 h-4 w-4" /> Resume
                 </a>
               </Button>
