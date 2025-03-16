@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import emailjs from "@emailjs/browser";
 
 import { useState, useRef } from "react";
 import {
@@ -90,6 +91,12 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    emailjs.sendForm(
+      "service_iifv99x",
+      "template_vt2djk8",
+      e.target,
+      "N5AIfOUdwmyhnppRJ"
+    );
 
     if (!validateForm()) {
       toast({
@@ -103,28 +110,33 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // In a real implementation, you would send this data to your backend
-      // For demonstration, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const result = await emailjs.sendForm(
+        "service_iifv99x",
+        "template_vt2djk8",
+        formRef.current,
+        "N5AIfOUdwmyhnppRJ"
+      );
 
-      // Email would be sent to sonseldeep.np@gmail.com
-      console.log("Form submitted:", formData);
+      if (result.status === 200) {
+        // Reset form
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        if (formRef.current) {
+          formRef.current.reset();
+        }
 
-      // Reset form
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      if (formRef.current) {
-        formRef.current.reset();
+        // Show success message
+        toast({
+          title: "Message sent successfully!",
+          description:
+            "Thank you for reaching out. I'll respond as soon as possible.",
+          variant: "default",
+          icon: <CheckCircle className="h-5 w-5 text-green-500" />,
+        });
+      } else {
+        throw new Error("Failed to send email");
       }
-
-      // Show success message
-      toast({
-        title: "Message sent successfully!",
-        description:
-          "Thank you for reaching out. I'll respond as soon as possible.",
-        variant: "default",
-        icon: <CheckCircle className="h-5 w-5 text-green-500" />,
-      });
     } catch (error) {
+      console.error("Error sending email:", error);
       toast({
         title: "Failed to send message",
         description:
